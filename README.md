@@ -1,5 +1,7 @@
 # Parallel Mandelbrot Set Calculus and Render
 
+Generate Mandelbrot set PGM images. The goal is to compare sequential and parallel implementations using MPI.
+
 ## Overview
 
 This is a project meant to lern the basic features of MPI (message passing interface). 
@@ -19,3 +21,10 @@ If the sequence remains bounded, the point is considered part of the set. Since 
 Each point of the complex plane is mapped to a pixel in the output image. The final grayscale value depends on how quickly the sequence diverges, allowing the fractal structure to be visualized.
 
 The project also explores the computational cost of generating the Mandelbrot set and compares different execution strategies, including parallel implementations.
+
+## Technologies used
+
+- C/C++
+- MPI
+- gcc
+- Make
