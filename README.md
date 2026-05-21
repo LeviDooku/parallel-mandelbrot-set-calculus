@@ -6,9 +6,9 @@ Generates Mandelbrot set images in PGM format. The goal is to compare sequential
 
 This is a project meant to learn the basic features of MPI (Message Passing Interface).
 
-MPI is a programming standard for distributed memory systems. It is designed to be used in programs that can exploit the existence of multiple processor.
+MPI is a programming standard for distributed memory systems. It is designed to be used in programs that can exploit the existence of multiple processors.
 
-The calculus and renderization of de Mandelbrot set is a perfect example of this, because the operations are independent from each other. 
+The calculation and renderization of the Mandelbrot set is a perfect example of this, because the operations are independent from each other. 
 
 The Mandelbrot set is a fractal defined on the complex plane. For each point `c`, the program evaluates the recursive sequence:
 
