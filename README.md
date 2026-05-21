@@ -33,23 +33,23 @@ The project also explores the computational cost of generating the Mandelbrot se
 
 The first step is solving the problem using a sequential implementation. This first program receives the maximum iterations as an input. Step by step:  
 
-1. Reserve memory for the image.
+1. It reserves memory for the image.
 2. For each pixel:
-    a. It is transformed into a point in the complex plane.
-    b. Determine if that point belongs to the Mandelbrot set.
-3. Measure the time required for that calculation.
-4. Save the PGM image. The grayscale value is chosen depending on the number of iterations required by the calculation.
+	a. It is transformed into a point in the complex plane.
+	b. It determines if that point belongs to the Mandelbrot set.
+3. It measures the time required for that calculation.
+4. It saves the PGM image. The grayscale value is chosen depending on the number of iterations required by the calculation.
 
-From this sequential program, we obtain the parallel one, parallelizing the calculation part using MPI. This new parallel program follows this steps:
+From this sequential program, we obtain the parallel one, parallelizing the calculation part using MPI. This new parallel program follows these steps:
 
-1. Initialize the MPI enviroment.
-2. Determine the local workload for each process. This specific implementation uses a cyclical allocation strategy. 
+1. It initizalizes the MPI environment.
+2. Then determines the local workload for each process. This specific implementation uses a cyclical allocation strategy. 
 This is because the workload is not evenly distributed, since there are regions of the set with more points than others. 
 The allocation works as follows: given a process `p`, the rows assigned to it are: `p`, `p + size`, `p + 2*size`, ...
-3. Reserve local memory depending on the rows.
-4. Perform the local calculation.
-5. Send the data size to process 0 (master).
-6. Calculate the offsets, since rows do not arrive in order.
-7. Reserve global memory.
-8. Collect the local data.
-9. Reconstruct the global image, using the same concept as in step 2.
+3. It reserves local memory depending on the rows.
+4. It performs the local calculation.
+5. It sends the data size to process 0 (master).
+6. It calculates the offsets, since rows do not arrive in order.
+7. It reserves global memory.
+8. It collects the local data.
+9. Finally, the global image gets reconstructed, using the same concept as in step 2.
