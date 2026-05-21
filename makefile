@@ -1,8 +1,8 @@
 CC = gcc
 MPICC = mpicc
-
+MPIEXEC = mpiexec
 CFLAGS = -Wall -std=c11
-MPICFLAGS = -Wall -std=c11
+MPICFLAGS = $(CFLAGS)
 LDFLAGS = -lm
 
 BIN = bin
@@ -26,6 +26,8 @@ MPI_IMG = $(IMG)/img_res_mpi.pgm
 ITER = 250 500 1000 2000 3000 5000 7500 10000 15000	#Adjustable
 PROCCESS = 2 4 6 8 					#Adjustable
 
+TRY_SEQ_ITER = 15000					#Adjustable
+
 .PHONY: all dirs try_seq try_parallel clean_data clean_img clean_bin  clean
 
 all: dirs compile try_seq try_parallel
@@ -37,16 +39,18 @@ dirs:
 		mkdir -p $(PLOT)
 		@echo "[+] Directories OK"
 
-compile:
+compile: dirs
 	$(MPICC) $(CFLAGS) -o $(MPI_BIN) $(MPI_SRC)
 	$(CC) $(CFLAGS) -o $(SEQ_BIN) $(SEQ_SRC)
 	@echo "[+] Compilation OK: $(MPI_BIN), $(SEQ_BIN) generated"
 
-try_seq:
-	@echo "nada aun"
-try_parallel:
-	@echo "nada aun"
-	
+try_seq: compile
+	./$(SEQ_BIN) $(TRY_SEQ_ITER)
+	@echo "[+] Execution completed successfully"
+
+try_parallel: compile #TERMINAR
+	$(MPIEXEC) -n 20
+
 clean_data:
 		rm -rf $(DATA)
 		rm -rf $(PLOT)
@@ -57,9 +61,6 @@ clean_img:
 clean_bin:
 		rm -rf $(BIN)
 		@echo "[+] Deleted /$(BIN)"
-#Está mal
 
-clean: 
-		clean_data
-		clean_img
-		clean_bin
+clean: clean_data clean_img clean_bin
+

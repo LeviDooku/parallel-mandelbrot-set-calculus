@@ -103,7 +103,7 @@ int main(int argc, char *argv[]) {
     //Salida adecuada para analizar datos
     printf("%d %.6f\n", max_iter, elapsed_time);
 
-    save_pgm("sec/img_res/mandelbrot_secuencial.pgm", image, WIDTH, HEIGHT, max_iter);
+    save_pgm("img/img_res_seq.pgm", image, WIDTH, HEIGHT, max_iter);
 
     free(image);
 

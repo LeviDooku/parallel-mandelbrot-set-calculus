@@ -190,7 +190,7 @@ int main(int argc, char *argv[]) {
         printf("%d %d %.6f\n", max_iter, size, elapsed_time);
 
         if (guardar_imagen) {
-            save_pgm("par/img_res/mandelbrot_paralelo.pgm", image, WIDTH, HEIGHT, max_iter);
+            save_pgm("img/img_res_mpi.pgm", image, WIDTH, HEIGHT, max_iter);
         }
     }
 
