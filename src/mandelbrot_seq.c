@@ -43,7 +43,7 @@ int mandelbrot(double cx, double cy, int max_iter) {
 void save_pgm(const char *filename, int *image, int width, int height, int max_iter) {
     FILE *file = fopen(filename, "w");
     if (file == NULL) {
-        fprintf(stderr, "Error: no se pudo abrir el archivo %s\n", filename);
+        fprintf(stderr, "Error: could not open file %s\n", filename);
         exit(EXIT_FAILURE);
     }
 
@@ -67,14 +67,14 @@ int main(int argc, char *argv[]) {
     int save_img = 0;
 
     if (argc < 2 || argc > 3) {
-        fprintf(stderr, "Uso: %s <max_iter> [save]\n", argv[0]);
+        fprintf(stderr, "Usage: %s <max_iter> [save]\n", argv[0]);
         return EXIT_FAILURE;
     }
 
     int max_iter = atoi(argv[1]);
 
     if(max_iter <= 0)
-        fprintf(stderr, "Error: max_iter debe ser > 0\n");
+        fprintf(stderr, "Error: max_iter must be > 0\n");
 
     if (argc == 3 && strcmp(argv[2], "save") == 0)
         save_img = 1;
@@ -85,7 +85,7 @@ int main(int argc, char *argv[]) {
 
     image = (int *) malloc(WIDTH * HEIGHT * sizeof(int));
     if (image == NULL) {
-        fprintf(stderr, "Error: no se pudo reservar memoria\n");
+        fprintf(stderr, "Error: memory allocation failed\n");
         return EXIT_FAILURE;
     }
 

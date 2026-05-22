@@ -24,14 +24,14 @@ MPI_DATA = $(DATA)/mpi_data.dat
 MPI_IMG = $(IMG)/img_res_mpi.pgm
 
 ITER = 250 500 1000 2000 3000 5000 7500 10000 15000	#Adjustable
-PROCCESS = 2 4 6 8									#Adjustable
+PROCESSES = 2 4 6 8									#Adjustable
 
 TRY_ITER = 5000										#Adjustable
 TRY_PROC = 8										#Adjustable
 
 .PHONY: all dirs try_seq try_parallel clean_data clean_img clean_bin  clean
 
-all: dirs compile try_seq try_parallel
+all: dirs compile
 
 dirs: 
 		mkdir -p $(BIN)
@@ -57,6 +57,31 @@ try_seq: compile_seq
 try_parallel: compile_mpi
 	$(MPIEXEC) -n $(TRY_PROC) ./$(MPI_BIN) $(TRY_ITER) save
 	@echo "[+] Execution completed successfully successfully and image $(MPI_IMG) generated"
+
+benchmark: compile
+	@echo "============================================================"
+	@echo "                    MANDELBROT BENCHMARK                   "
+	@echo "============================================================"
+	@echo ""
+	@printf "%-12s %-12s %-12s\n" "Version" "Iter" "Time(s)"
+	@echo "------------------------------------------------------------"
+	@for it in $(ITER); do \
+		out=$$(./$(SEQ_BIN) $$it); \
+		time=$$(echo $$out | awk '{print $$2}'); \
+		printf "%-12s %-12s %-12s\n" "SEQ" $$it $$time; \
+	done
+	@echo ""
+	@printf "%-12s %-12s %-12s %-12s\n" "Version" "Iter" "Processes" "Time(s)"
+	@echo "------------------------------------------------------------"
+	@for it in $(ITER); do \
+		for p in $(PROCESSES); do \
+			out=$$($(MPIEXEC) -n $$p ./$(MPI_BIN) $$it); \
+			time=$$(echo $$out | awk '{print $$3}'); \
+			printf "%-12s %-12s %-12s %-12s\n" "MPI" $$it $$p $$time; \
+		done; \
+	done
+	@echo ""
+	@echo "[+] Benchmark completed successfully"
 
 clean_data:
 		rm -rf $(DATA)

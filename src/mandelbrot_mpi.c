@@ -34,7 +34,7 @@ int mandelbrot(double cx, double cy, int max_iter) {
 void save_pgm(const char *filename, int *image, int width, int height, int max_iter) {
     FILE *file = fopen(filename, "w");
     if (file == NULL) {
-        fprintf(stderr, "Error: no se pudo abrir el archivo %s\n", filename);
+        fprintf(stderr, "Error: could not open file %s\n", filename);
         exit(EXIT_FAILURE);
     }
 
@@ -66,7 +66,7 @@ int main(int argc, char *argv[]) {
 
     if (argc < 2 || argc > 3) {
         if (rango == 0) {
-            fprintf(stderr, "Uso: %s <max_iter> [save]\n", argv[0]);
+            fprintf(stderr, "Usage: %s <max_iter> [save]\n", argv[0]);
         }
         MPI_Finalize();
         return EXIT_FAILURE;
@@ -76,7 +76,7 @@ int main(int argc, char *argv[]) {
 
     if (max_iter <= 0) {
         if (rango == 0) {
-            fprintf(stderr, "Error: max_iter debe ser > 0\n");
+            fprintf(stderr, "Error: max_iter must be > 0\n");
         }
         MPI_Finalize();
         return EXIT_FAILURE;
@@ -97,7 +97,7 @@ int main(int argc, char *argv[]) {
     int local_elems = local_rows * WIDTH;
     int *local_image = (int *) malloc(local_elems * sizeof(int));
     if (local_image == NULL) {
-        fprintf(stderr, "Proceso %d: error al reservar memoria local\n", rango);
+        fprintf(stderr, "Process %d: local memory allocation failed\n", rango);
         MPI_Finalize();
         return EXIT_FAILURE;
     }
@@ -129,7 +129,7 @@ int main(int argc, char *argv[]) {
         displs = (int *) malloc(size * sizeof(int));
 
         if (recvcounts == NULL || displs == NULL) {
-            fprintf(stderr, "Proceso 0: error al reservar memoria auxiliar\n");
+            fprintf(stderr, "Process 0: auxiliary memory allocation failed\n");
             free(local_image);
             free(recvcounts);
             free(displs);
@@ -152,7 +152,7 @@ int main(int argc, char *argv[]) {
         image = (int *) malloc(WIDTH * HEIGHT * sizeof(int));
 
         if (gathered == NULL || image == NULL) {
-            fprintf(stderr, "Proceso 0: error al reservar memoria global\n");
+            fprintf(stderr, "Process 0: global memory allocation failed\n");
             free(local_image);
             free(recvcounts);
             free(displs);
