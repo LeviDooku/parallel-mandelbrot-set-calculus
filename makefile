@@ -51,12 +51,12 @@ compile_mpi: dirs
 compile: compile_seq compile_mpi
 
 try_seq: compile_seq
-	./$(SEQ_BIN) $(TRY_SEQ_ITER)
-	@echo "[+] Execution completed successfully"
+	./$(SEQ_BIN) $(TRY_ITER) save
+	@echo "[+] Execution completed successfully and image $(SEQ_IMG) generated"
 
-try_parallel: compile_mpi #TERMINAR
-	$(MPIEXEC) -n $(TRY_PROC) ./$(MPI_BIN) $(TRY_ITER)
-	@echo "[+] Execution completed successfully"
+try_parallel: compile_mpi
+	$(MPIEXEC) -n $(TRY_PROC) ./$(MPI_BIN) $(TRY_ITER) save
+	@echo "[+] Execution completed successfully successfully and image $(MPI_IMG) generated"
 
 clean_data:
 		rm -rf $(DATA)

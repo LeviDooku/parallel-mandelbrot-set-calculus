@@ -73,6 +73,7 @@ int main(int argc, char *argv[]) {
     }
 
     max_iter = atoi(argv[1]);
+
     if (max_iter <= 0) {
         if (rango == 0) {
             fprintf(stderr, "Error: max_iter debe ser > 0\n");
@@ -189,9 +190,8 @@ int main(int argc, char *argv[]) {
         //Muestra los datos de forma cómoda para analizarlos
         printf("%d %d %.6f\n", max_iter, size, elapsed_time);
 
-        if (guardar_imagen) {
+        if (guardar_imagen)
             save_pgm("img/img_res_mpi.pgm", image, WIDTH, HEIGHT, max_iter);
-        }
     }
 
     free(local_image);

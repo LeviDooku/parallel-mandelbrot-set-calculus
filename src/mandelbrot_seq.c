@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <math.h>
+#include <string.h>
 #include <time.h>
 
 //Res. imagen de salida
@@ -64,12 +64,20 @@ void save_pgm(const char *filename, int *image, int width, int height, int max_i
 }
 
 int main(int argc, char *argv[]) {
-    if (argc != 2) {
-        fprintf(stderr, "Uso: %s <max_iter>\n", argv[0]);
+    int save_img = 0;
+
+    if (argc < 2 || argc > 3) {
+        fprintf(stderr, "Uso: %s <max_iter> [save]\n", argv[0]);
         return EXIT_FAILURE;
     }
 
     int max_iter = atoi(argv[1]);
+
+    if(max_iter <= 0)
+        fprintf(stderr, "Error: max_iter debe ser > 0\n");
+
+    if (argc == 3 && strcmp(argv[2], "save") == 0)
+        save_img = 1;
 
     int *image = NULL;
     clock_t start, end;
@@ -103,7 +111,8 @@ int main(int argc, char *argv[]) {
     //Salida adecuada para analizar datos
     printf("%d %.6f\n", max_iter, elapsed_time);
 
-    save_pgm("img/img_res_seq.pgm", image, WIDTH, HEIGHT, max_iter);
+    if(save_img)
+        save_pgm("img/img_res_seq.pgm", image, WIDTH, HEIGHT, max_iter);
 
     free(image);
 
