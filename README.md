@@ -53,3 +53,13 @@ The allocation works as follows: given a process `p`, the rows assigned to it ar
 7. It reserves global memory.
 8. It collects the local data.
 9. Finally, the global image gets reconstructed, using the same concept as in step 2.
+
+## Installation
+
+To download and compile the project:
+
+```bash
+git clone https://github.com/LeviDooku/parallel-mandelbrot-set-calculus.git
+cd parallel-mandelbrot-set-calculus
+make 
+
