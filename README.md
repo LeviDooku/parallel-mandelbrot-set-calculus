@@ -62,4 +62,17 @@ To download and compile the project:
 git clone https://github.com/LeviDooku/parallel-mandelbrot-set-calculus.git
 cd parallel-mandelbrot-set-calculus
 make 
+```
 
+The makefile is configured to do a bunch of things:
+
+```bash
+make compile_sec #Compile only sequential implementation
+make compile_parallel #Compile only parallel implementation
+make try_seq #Compile + test sequential implementation (5000 iterations)
+make try_parallel #Compile + test parallel implementation (5000 iterations, 8 processes)
+make benchmark #Try and compare different iterations and processes in each implementation
+make clean
+make clean_data
+make clean_bin
+make clean_img

@@ -41,11 +41,11 @@ dirs:
 		@echo "[+] Directories OK"
 
 compile_seq: dirs
-	$(CC) $(CFLAGS) -o $(SEQ_BIN) $(SEQ_SRC)
+	@$(CC) $(CFLAGS) -o $(SEQ_BIN) $(SEQ_SRC)
 	@echo "[+] Compilation OK: $(SEQ_BIN)"
 
 compile_mpi: dirs
-	$(MPICC) $(CFLAGS) -o $(MPI_BIN) $(MPI_SRC)
+	@$(MPICC) $(CFLAGS) -o $(MPI_BIN) $(MPI_SRC)
 	@echo "[+] Compilation OK: $(MPI_BIN)"
 
 compile: compile_seq compile_mpi
