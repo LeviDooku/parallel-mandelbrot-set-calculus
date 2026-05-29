@@ -76,3 +76,30 @@ make clean
 make clean_data
 make clean_bin
 make clean_img
+```
+
+## Examples
+
+### Output
+
+This is an example of an output of the program. The image contrast has been edited for better viewing.
+
+![Mandelbrot example](edited_result.png)
+
+### Performance results
+
+These results were obtained from an Intel i7-1355U processor.
+
+The following table shows the execution time comparison between the sequential implementation and the MPI implementation using different numbers of processes.
+
+| Iterations | Sequential time (s) | MPI 2 processes (s) | Speedup 2p | MPI 4 processes (s) | Speedup 4p | MPI 6 processes (s) | Speedup 6p | MPI 8 processes (s) | Speedup 8p |
+|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| 250 | 0.499562 | 0.261729 | 1.91x | 0.268858 | 1.86x | 0.236152 | 2.12x | 0.188359 | 2.65x |
+| 500 | 0.968625 | 0.483396 | 2.00x | 0.507348 | 1.91x | 0.385956 | 2.51x | 0.305779 | 3.17x |
+| 1000 | 1.822307 | 0.927623 | 1.96x | 0.979343 | 1.86x | 0.698530 | 2.61x | 0.541856 | 3.36x |
+| 2000 | 3.645121 | 1.815029 | 2.01x | 1.915575 | 1.90x | 1.275459 | 2.86x | 1.014671 | 3.59x |
+| 3000 | 5.376793 | 2.728001 | 1.97x | 2.853907 | 1.88x | 1.951394 | 2.76x | 1.483955 | 3.62x |
+| 5000 | 8.946233 | 4.476264 | 2.00x | 4.729349 | 1.89x | 3.176996 | 2.82x | 2.422154 | 3.69x |
+| 7500 | 13.380289 | 6.683995 | 2.00x | 7.075126 | 1.89x | 4.765086 | 2.81x | 3.594845 | 3.72x |
+| 10000 | 17.806782 | 8.914924 | 2.00x | 9.420041 | 1.89x | 6.334595 | 2.81x | 4.802803 | 3.71x |
+| 15000 | 26.750105 | 13.344259 | 2.00x | 14.114373 | 1.90x | 9.457971 | 2.83x | 7.110930 | 3.76x |

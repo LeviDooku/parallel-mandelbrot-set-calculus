@@ -9,7 +9,6 @@ BIN = bin
 DATA = dat
 SRC = src
 IMG = img
-PLOT = plot
 
 SEQ_SRC = $(SRC)/mandelbrot_seq.c
 SEQ_BIN = $(BIN)/mandelbrot_seq
@@ -37,7 +36,6 @@ dirs:
 		mkdir -p $(BIN)
 		mkdir -p $(DATA)
 		mkdir -p $(IMG)
-		mkdir -p $(PLOT)
 		@echo "[+] Directories OK"
 
 compile_seq: dirs
